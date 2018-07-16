@@ -325,6 +325,8 @@ function Runtime () {
 
             const getPackageInfoNoCheck = ActivityThread.getPackageInfoNoCheck;
             getPackageInfoNoCheck.implementation = function (appInfo) {
+              console.log('getPackageInfoNoCheck was called');
+              Thread.sleep(0.5);
               const apk = getPackageInfoNoCheck.apply(this, arguments);
               if (!initialized && hookpoint === 'early') {
                 initialized = true;
@@ -334,6 +336,7 @@ function Runtime () {
               }
               return apk;
             };
+            console.log('hooked getPackageInfoNoCheck');
           }
         });
       }
